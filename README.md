@@ -5,7 +5,7 @@ Provide official documentation for Hoon runes and commands under point.
 
 `git clone https://github.com/poctyr-bidbes/hoon-assist-emacs.git`
 
-Move the following files into your ~/site-lisp/ directory:
+Move the following files into your ~/.emacs.d/site-lisp/ directory:
 
 hoon-assist-emacs.el<br>
 hoon-dictionary.json
