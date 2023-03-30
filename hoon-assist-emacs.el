@@ -2,7 +2,7 @@
 (require 'shr)
 
 (global-set-key (kbd "<f7>") 'get-token-definition)
-(setq dict-file "/home/mbc/projects/hoon-assist-emacs/hoon-dictionary.json")
+(setq dict-file "hoon-dictionary.json")
 
 (defun json-to-list (json lst)
   (if (cdr json)      
@@ -22,7 +22,7 @@
       aa)))
 
 (setq alldefs
-  ;;note that json is a list of hash tables
+  ;;json is a list of hash tables
   (let* ((json-object-type 'hash-table)
 	 (json-array-type 'list)
 	 (json-key-type 'string)
@@ -46,7 +46,12 @@
  ;  (other-window 1)
    ))
 
-;;(window-list)
+
+(defun striplus (s)
+  (if (> (length s) 2)
+      (replace-regexp-in-string "+" "" s)
+    s))
+
 
 (defun get-token-definition ()
   (interactive)
@@ -59,7 +64,7 @@
 	     (before-space (re-search-forward "[ (\n]" nil nil -1))
 	     (dummy (goto-char current-loc))
 	     (after-space (re-search-forward "[ (\n]" nil nil 1))
-	     (aa (string-trim (buffer-substring-no-properties  before-space  (- after-space 1) )))
+	     (aa (string-trim (striplus (buffer-substring-no-properties  before-space  (- after-space 1) ))))
 	     (def (gethash aa alldefs)) ;;gets the definition      
 	     )
 	(if (eq nil def) 
@@ -70,42 +75,10 @@
     ))
 
 
+(provide 'hoon-assist-emacs)
 
-;; (defun process-json-old (json newlst)
-;;   (if (cdr json)      
-;;     (progn
-;;       (setq newlst (cons  (car json) newlst))	    
-;;       (process-json (cdr json) newlst))
-  
-;;     (setq newlst (cons (car json) newlst))
-;;     ))
-
-
-;; (let* ((a '(1 2 3 4))
-;;        (b (process-json a '()))
-;;        (dummy (prep-foo-buffer))
-;;        )
-;; (with-current-buffer "foo" (insert  (format "%s" b)))
-;;   )
-
-(defun mbc-print-hash (hashtable)
-  "Prints the hashtable, each line is key, val"
-  (maphash
-   (lambda (k v)
-     (insert "key:  ")
-     (insert (format "%s" k))
-     (insert "\n")
-     (insert "val:  ")
-     (insert (format "%s" v))
-     (insert "\n\n------------------------\n")
-     )
-   hashtable
-   ))
-
-
-
-(defun pp-hash (table)
-  (let ((data (nthcdr 2 (nbutlast
-                         (split-string (pp-to-string table) "[()]")
-                         2))))
-    (insert (concat "(" (car data) ")"))))
+;; (defun pp-hash (table)
+;;   (let ((data (nthcdr 2 (nbutlast
+;;                          (split-string (pp-to-string table) "[()]")
+;;                          2))))
+;;     (insert (concat "(" (car data) ")"))))

@@ -7,8 +7,10 @@ Provide official documentation for Hoon runes and commands under point.
 
 Move the following files into your ~/site-lisp/ directory:
 
-hoon-assist-emacs.el
+hoon-assist-emacs.el<br>
 hoon-dictionary.json
+
+Depending on your version of emacs you may also need to add shr.el
 
 add (require 'hoon-assist-emacs) to your init.el file
 
