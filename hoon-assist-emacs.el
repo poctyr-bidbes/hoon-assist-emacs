@@ -2,9 +2,9 @@
 (require 'shr)
 
 (global-set-key (kbd "<f7>") 'get-token-definition)
-(setq dict-file (concat (locate-dominating-file "." "site-lisp") "site-lisp/hoon-dictionary.json"))
-;;(setq dict-file "/home/mbc/projects/hoon-assist-emacs/hoon-dictionary.json")
-;;(setq dict-file (concat (locate-dominating-file "." "hoon-assist-emacs") "hoon-assist-emacs/hoon-dictionary.json"))
+(setq site-lisp-dir "~/.emacs.d/site-lisp/")
+
+(setq dict-file (concat site-lisp-dir "hoon-dictionary.json"))
 
 
 (defun json-to-list (json lst)
