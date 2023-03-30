@@ -2,7 +2,10 @@
 (require 'shr)
 
 (global-set-key (kbd "<f7>") 'get-token-definition)
-(setq dict-file "hoon-dictionary.json")
+(setq dict-file (concat (locate-dominating-file "." "site-lisp") "site-lisp/hoon-dictionary.json"))
+;;(setq dict-file "/home/mbc/projects/hoon-assist-emacs/hoon-dictionary.json")
+;;(setq dict-file (concat (locate-dominating-file "." "hoon-assist-emacs") "hoon-assist-emacs/hoon-dictionary.json"))
+
 
 (defun json-to-list (json lst)
   (if (cdr json)      
@@ -11,6 +14,7 @@
 	(json-to-list (cdr json) lst))
     (setq lst (cons  (cons (gethash "keys" (car json)) (gethash "doc" (car json))) lst))))
 
+
 (defun make-ht-recurse (lst aa)
   ;;lst is the list created by alldefs; aa is the (empty) hash table
   (if (cdr lst)      
@@ -18,7 +22,7 @@
         (puthash (caar lst) (cdar lst) aa)       
 	(make-ht-recurse (cdr lst) aa))
     (progn
-      (puthash (caar lst) (cdar lst) aa)
+      (puthash (caar lst) (cdar lst) aa)  ;;modify last car
       aa)))
 
 (setq alldefs
@@ -41,9 +45,6 @@
    (with-current-buffer "foo" (insert (format "%s" html)))
    (shr-render-buffer "foo")
    (kill-buffer "foo")
- ;  (split-window-right)
-;   (set-window-buffer nil "*html*")
- ;  (other-window 1)
    ))
 
 
@@ -51,7 +52,6 @@
   (if (> (length s) 2)
       (replace-regexp-in-string "+" "" s)
     s))
-
 
 (defun get-token-definition ()
   (interactive)
@@ -64,21 +64,14 @@
 	     (before-space (re-search-forward "[ (\n]" nil nil -1))
 	     (dummy (goto-char current-loc))
 	     (after-space (re-search-forward "[ (\n]" nil nil 1))
-	     (aa (string-trim (striplus (buffer-substring-no-properties  before-space  (- after-space 1) ))))
+	     (aa (striplus  (string-trim (buffer-substring-no-properties  before-space  (- after-space 1) ))))
 	     (def (gethash aa alldefs)) ;;gets the definition      
 	     )
 	(if (eq nil def) 
 	    (message "%s %s" aa "is not in the dictionary!")
-	  (prep-foo-buffer def))
-      )
+	  (prep-foo-buffer def)) )
   ;;  (error nil)
     ))
 
 
 (provide 'hoon-assist-emacs)
-
-;; (defun pp-hash (table)
-;;   (let ((data (nthcdr 2 (nbutlast
-;;                          (split-string (pp-to-string table) "[()]")
-;;                          2))))
-;;     (insert (concat "(" (car data) ")"))))
