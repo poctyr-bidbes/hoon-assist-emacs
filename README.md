@@ -40,3 +40,5 @@ Modify the hook function to utilize a different function key. Alternatively you 
 
 If your site-lisp directory differs from `~/.emacs.d/site-lisp` you will need to edit the `site-lisp-dir` variable in the hook method.
 
+
+Tested with GNU Emacs 27.1 on Ubuntu 22.04.2 LTS, 8GB RAM 
