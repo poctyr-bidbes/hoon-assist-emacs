@@ -12,8 +12,6 @@ Move the following files into your ~/.emacs.d/site-lisp/ directory:
 hoon-assist-emacs.el<br>
 hoon-dictionary.json
 
-Depending on your version of emacs you may also need to add shr.el
-
 add (require 'hoon-assist-emacs) to your init.el file
 
 ## Operation

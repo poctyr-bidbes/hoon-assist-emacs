@@ -1,5 +1,4 @@
 (require 'json)
-(require 'shr)
 
 (global-set-key (kbd "<f7>") 'get-token-definition)
 (setq site-lisp-dir "~/.emacs.d/site-lisp/")
