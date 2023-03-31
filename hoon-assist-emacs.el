@@ -1,9 +1,5 @@
 (require 'json)
-
-(global-set-key (kbd "<f7>") 'get-token-definition)
-(setq site-lisp-dir "~/.emacs.d/site-lisp/")
-
-(setq dict-file (concat site-lisp-dir "hoon-dictionary.json"))
+(require 'shr)
 
 
 (defun json-to-list (json lst)
@@ -73,4 +69,3 @@
     ))
 
 
-(provide 'hoon-assist-emacs)
