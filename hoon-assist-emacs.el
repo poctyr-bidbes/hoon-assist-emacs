@@ -7,7 +7,7 @@
       (progn
 	(setq lst (cons  (cons (car (gethash "keys" (car json))) (gethash "doc" (car json))) lst))      
 	(json-to-list (cdr json) lst))
-    (setq lst (cons  (cons (gethash "keys" (car json)) (gethash "doc" (car json))) lst))))
+    (setq lst (cons  (cons (car (gethash "keys" (car json))) (gethash "doc" (car json))) lst))))  ;;modify last keys
 
 
 (defun make-ht-recurse (lst aa)
@@ -17,7 +17,7 @@
         (puthash (caar lst) (cdar lst) aa)       
 	(make-ht-recurse (cdr lst) aa))
     (progn
-      (puthash (caar lst) (cdar lst) aa)  ;;modify last car
+      (puthash (caar lst) (cdar lst) aa) 
       aa)))
 
 (setq alldefs

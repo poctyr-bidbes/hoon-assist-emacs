@@ -42,6 +42,6 @@ If your site-lisp directory differs from `~/.emacs.d/site-lisp` you will need to
 
 3 minute [Youtube video](https://youtu.be/BY4O-g9IwAY)
 
-Dictionary source : https://github.com/urbit/hoon-assist-vscode/tree/main/src/lib
+Dictionary source: https://github.com/urbit/hoon-assist-vscode/tree/main/src/lib
 
 Tested with GNU Emacs 27.1 on Ubuntu 22.04.2 LTS, 8GB RAM 
